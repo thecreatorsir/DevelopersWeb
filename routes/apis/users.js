@@ -45,4 +45,30 @@ router.post('/register', (req, res) => {
   });
 });
 
+//   @route api/users/login
+//   @desc  route for users to login and generate jwt
+//   @access public  
+
+router.post('/login',(req,res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  
+  User.findOne({email})
+   .then(user => {
+     if(!user){
+       return res.status(404).json({email:'User not found'});
+     }
+
+     //check for the password
+     bcypt.compare(password,user.password)
+      .then(isMatched => {
+        if(isMatched){
+          res.json({msg:"login sucessful"});
+        }else{
+          return res.status(400).json({password:'Password incorrect'});
+        }
+      });
+   });
+});
+
 module.exports = router;
