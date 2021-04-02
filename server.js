@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
 const users = require('./routes/apis/users');
 const profile = require('./routes/apis/profile');
 const posts = require('./routes/apis/posts');
 
 const app = express();
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 //DB  config 
 const db = require('./config/keys').mongoURI;
 
