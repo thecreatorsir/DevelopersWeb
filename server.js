@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/apis/users');
 const profile = require('./routes/apis/profile');
 const posts = require('./routes/apis/posts');
-
+const passport = require('passport');
 const app = express();
 
 app.use(express.urlencoded({extended: false}));
@@ -19,7 +19,11 @@ mongoose
      .catch((err)=>console.log(err));
         
 
-app.get('/',(req,res)=> res.send('hello world') );
+//passport middleware
+app.use(passport.initialize());
+
+// passport config
+require('./config/passport')(passport);
 
 //use routes
 
