@@ -1,13 +1,18 @@
+import React, { Component } from "react";
 import "./App.css";
-
-function App() {
-  return (
-    <div className='App'>
-      <h1>MY client setup</h1>
-      <div className='btn btn-primary'>hellp</div>
-      <i className='fa fa-car'></i>
-    </div>
-  );
+import Footer from "./components/layout/Footer";
+import Landing from "./components/layout/Landing";
+import Navbar from "./components/layout/Navbar";
+class App extends Component {
+  render() {
+    return (
+      <div className='App'>
+        <Navbar />
+        <Landing />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;
