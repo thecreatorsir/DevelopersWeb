@@ -15,13 +15,18 @@ class Navbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const authLinks = (
       <ul className='navbar-nav ml-auto'>
-        <li className='nav-item'>
+        <li className='nav-item mr-3'>
+          <Link className='nav-link' to='/dashboard'>
+            Dashboard
+          </Link>
+        </li>
+        <li className='nav-item mt-2'>
           <a
             href='/#'
             onClick={(e) => this.logoutClick(e)}
             style={{
               color: "grey",
-              textDecoration: "inherit",
+              textDecoration: "none",
             }}
             className='nav-item'
           >
