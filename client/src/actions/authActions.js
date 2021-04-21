@@ -2,9 +2,11 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER } from "./Types";
 import axios from "axios";
+import { clearErrors } from "./postActions";
 //register user action creator
 //  here the dispatch is used for running the middleware
 export const registerUser = (userData, history) => (dispatch) => {
+  dispatch(clearErrors());
   axios
     .post("/api/users/register", userData)
     .then((res) => history.push("/login"))
@@ -19,6 +21,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 //Login get user info
 
 export const loginUser = (userData) => (dispatch) => {
+  dispatch(clearErrors());
   axios
     .post("/api/users/login", userData)
     .then((res) => {
