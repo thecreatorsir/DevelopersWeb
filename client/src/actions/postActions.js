@@ -6,10 +6,12 @@ import {
   GET_POSTS,
   GET_POST,
   DELETE_POST,
+  CLEAR_ERRORS,
 } from "./Types";
 
 //add post
 export const addPost = (postData) => (dispatch) => {
+  dispatch(clearErrors());
   axios
     .post("/api/posts", postData)
     .then((res) =>
@@ -28,8 +30,27 @@ export const addPost = (postData) => (dispatch) => {
 
 //add comment
 export const addComment = (postId, commentData) => (dispatch) => {
+  dispatch(clearErrors());
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
+    .then((res) =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//delete comment
+export const deleteComment = (postId, commentid) => (dispatch) => {
+  axios
+    .delete(`/api/posts/comment/${postId}/${commentid}`)
     .then((res) =>
       dispatch({
         type: GET_POST,
@@ -130,5 +151,12 @@ export const removeLike = (id) => (dispatch) => {
 export const setPostLoding = () => {
   return {
     type: POST_LOADING,
+  };
+};
+
+//clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
   };
 };

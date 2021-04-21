@@ -5,6 +5,7 @@ import Spinner from "../common/Spinner";
 import PostItem from "../posts/PostItem";
 import { getPost } from "../../actions/postActions";
 import CommentForm from "../post/CommentForm";
+import CommentFeed from "./CommentFeed";
 class Post extends Component {
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
@@ -20,6 +21,7 @@ class Post extends Component {
         <div>
           <PostItem post={post} showActions={false} />
           <CommentForm postid={post._id} />
+          <CommentFeed postId={post._id} comments={post.comments} />
         </div>
       );
     }
