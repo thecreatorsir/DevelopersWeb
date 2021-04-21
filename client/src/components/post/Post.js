@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import PostItem from "../posts/PostItem";
 import { getPost } from "../../actions/postActions";
+import CommentForm from "../post/CommentForm";
 class Post extends Component {
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
@@ -18,6 +19,7 @@ class Post extends Component {
       postContent = (
         <div>
           <PostItem post={post} showActions={false} />
+          <CommentForm postid={post._id} />
         </div>
       );
     }
