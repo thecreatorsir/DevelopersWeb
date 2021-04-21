@@ -2,6 +2,7 @@ import {
   ADD_POST,
   DELETE_POST,
   GET_POSTS,
+  GET_POST,
   POST_LOADING,
 } from "../actions/Types";
 
@@ -17,6 +18,12 @@ const postReducer = (state = intialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case GET_POST:
+      return {
+        ...state,
+        post: action.payload,
+        loading: false,
       };
     case GET_POSTS:
       return {
